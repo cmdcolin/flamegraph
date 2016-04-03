@@ -27,8 +27,8 @@ proto.init = function init(opts) {
 
   this._flamegraphSvgEl = document.getElementById('flamegraph-svg');
   this._svgBackgroundEl = document.getElementById('svg-background');
-  this._viewBoxWidth = this._flamegraphSvgEl.dataset.width;
-  this._viewBoxHeight = this._flamegraphSvgEl.dataset.height;
+  this._viewBoxWidth = this._flamegraphSvgEl.width;
+  this._viewBoxHeight = this._flamegraphSvgEl.height;
   this._performZoom = performZoom(this);
 
   this._opts = opts;
@@ -60,7 +60,7 @@ proto._zoomRects = function _zoomRects() {
     text = func.children[2];
     rect = func.children[1];
   
-    w = rect.dataset.width;
+    w = rect.width;
     newWidth = w * this._zoomLevel;
 
     // ensure to keep search matches visible
@@ -70,17 +70,17 @@ proto._zoomRects = function _zoomRects() {
     if (newWidth < this._opts.minwidth) func.classList.add('hidden');
     else func.classList.remove('hidden');
 
-    x = rect.dataset.x;
+    x = rect.x;
     newX = x * this._zoomLevel;
     
     rect.setAttribute('width', newWidth);
     rect.setAttribute('x', newX);
     
     if (!text) continue;
-    x = text.dataset.x;
+    x = text.x;
     text.setAttribute('x', x * this._zoomLevel);
 
-    funcName = func.dataset.funcname;
+    funcName = func.funcname;
     this._redrawText(funcName, text, w * this._zoomLevel);
   }
 }
@@ -99,8 +99,8 @@ proto._zoom = function _zoom(e) {
 
   // zoom overall image width
   currentWidth = this._flamegraphSvgEl.getAttribute('width')
-  w = this._flamegraphSvgEl.dataset.width;
-  x = this._flamegraphSvgEl.dataset.x;
+  w = this._flamegraphSvgEl.width;
+  x = this._flamegraphSvgEl.x;
 
   newWidth = w * this._zoomLevel;
   newViewBox = '0 0 ' + newWidth + ' ' + this._viewBoxHeight;
