@@ -30,9 +30,9 @@ function addMatchIndicator(el) {
 
 function removeMatchIndicator(el) {
   el.classList.remove('match');  
-  //var rect = el.children[1]
-  //rect.setAttribute('width', parseInt(rect.width));
-  //rect.setAttribute('height', parseInt(rect.height));
+  var rect = el.children[1];
+  rect.setAttribute('width', parseInt(rect.getAttribute('width')));
+  rect.setAttribute('height', parseInt(rect.getAttribute('height')));
 }
 
 function addBlink(el) {
